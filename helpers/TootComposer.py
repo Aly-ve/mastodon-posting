@@ -1,7 +1,5 @@
 #!/bin/python3
 
-from mastodon import Mastodon
-
 class TootComposer():
 
   TOOT_MAX_LEN = 480

@@ -1,10 +1,10 @@
 #!/bin/python3
 
 import sys
-sys.path.append('..')
+sys.path.append('../helpers')
 
 import unittest
-from helpers import TootComposer
+from TootComposer import *
 
 class TestTootComposer(unittest.TestCase):
 
@@ -18,5 +18,15 @@ class TestTootComposer(unittest.TestCase):
     self.assertEqual(len(toots), 1)
     self.assertEqual(toots[0], "Hello world")
 
+  def test_create_long_toot(self):
+    tootComposer = TootComposer(toot = self.longToot)
+    toots = tootComposer.fill()
+    self.assertEqual(len(toots), 2)
+
+  def test_empty_toot(self):
+    tootComposer = TootComposer(toot = [])
+    toots = tootComposer.fill()
+    self.assertEqual(len(toots), 0)
+
 if __name__ == '__main__':
-  unittest.main()
+  unittest.main(verbosity=2)
