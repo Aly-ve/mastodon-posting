@@ -13,6 +13,7 @@ class TootSender():
     )
 
   def send(self, toots, visibility = 'public', previous_id = None):
+    """Send a list of toot"""
     previous_toot = previous_id
     for toot in toots:
       previous_id = previous_toot.id if previous_toot is not None else None
@@ -24,6 +25,7 @@ class TootSender():
       previous_toot = toot
   
   def sendWithPicture(self, toots, pictures, visibility = 'public'):
+    """Send a picture in the first toot and send the rest of the toot"""
     media = [self.mastodon.media_post(p) for p in pictures]
     firstToot = toots[0]
     toots.remove(firstToot)
