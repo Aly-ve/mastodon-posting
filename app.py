@@ -3,6 +3,26 @@
 from helpers.TootComposer import TootComposer
 from helpers.TootSender import TootSender
 
+from flask import request
+from flask_api import FlaskAPI, status
+
+app = FlaskAPI(__name__)
+
+app.config['DEFAULT_PARSERS'] = [
+  'flask.ext.api.parsers.JSONParser',
+  'flask.ext.api.parsers.URLEncodedParser',
+  'flask.ext.api.parsers.MaltiPartParser'
+]
+
+@app.route('/create', methods=['POST'])
+def create():
+  test = str(request.data.get('test',))
+  print(test)
+  
+  return {
+    "hello": "world"
+  }
+
 def main():
   toot = str(input("Entrez votre toot:\n"))
   media = []
@@ -19,4 +39,5 @@ def main():
 
 
 if __name__ == '__main__':
-  main()
+  #main()
+  app.run(debug = True)
